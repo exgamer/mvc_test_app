@@ -48,8 +48,10 @@ class SiteController extends Controller
         return $this->redirect('index');
     }
 
+
     public function actionIndex($page = 0)
     {
+        // к этому моменту я уже очень устал и сортировка сделана по простому
         $params = $this->getApp()->getRequest()->getQueryParams();
         $orderBy['id'] = 'DESC';
         if (isset($params['username']) && in_array($params['username'], ["ASC", "DESC"])) {

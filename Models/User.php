@@ -29,6 +29,11 @@ class User extends Model
         ];
     }
 
+    /**
+     * авторизация сделана хардкодом
+     *
+     * @return bool
+     */
     public function login()
     {
         if ($this->login == 'admin' && $this->password == '123')  {
