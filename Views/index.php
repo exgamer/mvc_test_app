@@ -20,7 +20,6 @@
         </div>
     <?php endif;?>
 
-
     <a href="/site/create" class="btn btn-primary btn-lg btn-block" >Добавить</a>
     <?php if (! $user->isAdmin()) : ?>
         <a href="/site/login" class="btn btn-primary btn-lg btn-block" >Авторизация</a>
@@ -51,6 +50,9 @@
                         Завершено
                     </a>
                 </th>
+                <th scope="col">
+                    Отредактировано
+                </th>
                 <?php if ($user->isAdmin()) : ?>
                     <th scope="col">Действия</th>
                 <?php endif;?>
@@ -58,16 +60,17 @@
             </thead>
             <tbody>
             <?php foreach ($models as $model): ?>
-                    <tr>
-                        <th scope="row"><?= $model['id']; ?></th>
-                        <td><?= $model['username']; ?></td>
-                        <td><?= $model['email']; ?></td>
-                        <td><?= $model['text']; ?></td>
-                        <td><?= $model['done'] == 0 ? "Нет" : "Да"; ?></td>
-                        <?php if ($user->isAdmin()) : ?>
-                            <td><a href="/site/update?id=<?= $model['id']; ?>" class="btn btn-primary">Редактировать</a></td>
-                        <?php endif;?>
-                    </tr>
+                <tr>
+                    <th scope="row"><?= $model['id']; ?></th>
+                    <td><?= $model['username']; ?></td>
+                    <td><?= $model['email']; ?></td>
+                    <td><?= $model['text']; ?></td>
+                    <td><?= $model['done'] == 0 ? "Нет" : "Да"; ?></td>
+                    <td><?= $model['edited'] == 0 ? "Нет" : "Да"; ?></td>
+                    <?php if ($user->isAdmin()) : ?>
+                        <td><a href="/site/update?id=<?= $model['id']; ?>" class="btn btn-primary">Редактировать</a></td>
+                    <?php endif;?>
+                </tr>
             <?php endforeach;?>
             </tbody>
         </table>
@@ -87,7 +90,7 @@
     <?php else:?>
         <br/><br/>
         <div class="alert alert-primary" role="alert">
-             Нет задач
+            Нет задач
         </div>
     <?php endif;?>
     <footer class="my-5 pt-5 text-muted text-center text-small">

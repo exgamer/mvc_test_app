@@ -118,10 +118,17 @@ class SiteController extends Controller
             }
 
             $model->loadData($post);
-            if ($model->validate() && $this->taskService()->update($model->getValidData(), ['id' => $id])) {
-                $this->setFlash("Успешное обновление");
+            if ($model->validate()){
+                $data = $model->getValidData();
+                if ($this->getApp()->getUser()->isAdmin() && $row['text'] != $model->text) {
+                    $data['edited'] = 1;
+                }
 
-                return $this->redirect('index');
+                if ($this->taskService()->update($data, ['id' => $id])) {
+                    $this->setFlash("Успешное обновление");
+
+                    return $this->redirect('index');
+                }
             }
         }
 
