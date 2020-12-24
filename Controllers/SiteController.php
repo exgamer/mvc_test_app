@@ -84,6 +84,7 @@ class SiteController extends Controller
             'user' => $this->getApp()->getUser(),
             'pageCount' => $pageCount,
             'orderBy' => $orderBy,
+            'message' => $this->getFlash()
         ]);
     }
 
@@ -93,6 +94,7 @@ class SiteController extends Controller
         if ($post = $this->getApp()->getRequest()->getPost()) {
             $model->loadData($post);
             if ($model->validate() && $this->taskService()->persist($model->getValidData())) {
+                $this->setFlash("Успешное создание");
 
                 return $this->redirect('index');
             }
@@ -117,11 +119,29 @@ class SiteController extends Controller
 
             $model->loadData($post);
             if ($model->validate() && $this->taskService()->update($model->getValidData(), ['id' => $id])) {
+                $this->setFlash("Успешное обновление");
 
                 return $this->redirect('index');
             }
         }
 
         return $this->render('form', ['model' => $model, 'title' => 'Редактировать задачу', 'user' => $this->getApp()->getUser()]);
+    }
+
+    public function setFlash($message)
+    {
+        setcookie('message', $message, time() + (86400 * 30), "/");
+    }
+
+    public function getFlash()
+    {
+        if(! isset($_COOKIE['message'])) {
+            return false;
+        }
+
+        $result = $_COOKIE['message'];
+        setcookie('message', null, -100, "/");
+
+        return $result;
     }
 }

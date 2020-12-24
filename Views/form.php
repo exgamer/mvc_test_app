@@ -37,11 +37,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 mb-3">
+                <div class="col-md-6 mb-3">
                     <label for="text" class="form-label">Текст</label>
-                    <textarea class="form-control <?= $model->hasError('text') ? "is-invalid" : "";?>" id="text" name="text" rows="3">
-                        <?= $model->text;?>
-                    </textarea>
+                    <textarea class="form-control <?= $model->hasError('text') ? "is-invalid" : "";?>" id="text" name="text" rows="3"><?= $model->text;?></textarea>
                     <div class="invalid-feedback">
                         <?= $model->getError('text');?>
                     </div>

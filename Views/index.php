@@ -14,6 +14,13 @@
     <div class="py-5 text-center">
         <h2>Задачи</h2>
     </div>
+    <?php if ($message !== false):?>
+        <div class="alert alert-primary" role="alert">
+            <?= $message?>
+        </div>
+    <?php endif;?>
+
+
     <a href="/site/create" class="btn btn-primary btn-lg btn-block" >Добавить</a>
     <?php if (! $user->isAdmin()) : ?>
         <a href="/site/login" class="btn btn-primary btn-lg btn-block" >Авторизация</a>

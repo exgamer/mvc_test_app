@@ -59,6 +59,8 @@ abstract class Model extends BaseObject
             if ($validator instanceof StringValidator) {
                 $this->{$attr} = htmlspecialchars($this->{$attr}, null, null, false);
                 $this->{$attr} = strip_tags($this->{$attr});
+                $this->{$attr} = trim( $this->{$attr} );
+                $this->{$attr} = preg_replace("/[^\x20-\xFF]/","", @strval($this->{$attr}));
             }
 
             if (! $validator->validate()) {
