@@ -105,6 +105,10 @@ class SiteController extends Controller
 
     public function actionUpdate($id)
     {
+        if (! $this->getApp()->getUser()->isAdmin()) {
+            return $this->redirect('index');
+        }
+        
         $row = $this->taskService()->oneById( $id);
         if (! $row) {
             throw new \Exception("Not found");
