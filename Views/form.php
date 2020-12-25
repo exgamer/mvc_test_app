@@ -44,13 +44,14 @@
                         <?= $model->getError('text');?>
                     </div>
                 </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input " value="<?= $model->done;?>" <?php if ($model->done == 1)  echo "checked='checked'";?> id="done" name="done">
-                    <label class="custom-control-label" for="done">
-                        Завершено
-                    </label>
-                </div>
-
+                <?php if ($user->isAdmin()): ?>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input " value="<?= $model->done;?>" <?php if ($model->done == 1)  echo "checked='checked'";?> id="done" name="done">
+                        <label class="custom-control-label" for="done">
+                            Завершено
+                        </label>
+                    </div>
+                <?php endif; ?>
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Сохранить</button>
                 <a href="/site/index" class="btn btn-primary btn-lg btn-block" >Назад</a>
